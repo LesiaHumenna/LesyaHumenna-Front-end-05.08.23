@@ -4,31 +4,33 @@ function Student(fname, lname, birthDay, grade) {
   this.lname = lname;
   this.birthDay = parseInt(birthDay);
   this.grade = grade;
-  this.ageStudent = function () {
+  this.arr = new Array(25);
+}
+Student.prototype.ageStudent = function () {
     let d = new Date();
     return d.getFullYear() - this.birthDay;
   };
-  this.getGradeScore = function () {
+  Student.prototype.getGradeScore = function () {
     if (this.grade.length === 0) {
       return 0;
     }
     const sum = this.grade.reduce((total, grade) => total + grade, 0);
     return sum / this.grade.length;
   };
-  this.arr = new Array(25);
-  this.present = function () {
+  
+  Student.prototype.present = function () {
     if (this.arr.filter(a => a).length < 25) {
      this.arr.push(true);
      return true;
     }
   };
-  this.absent = function () {
+  Student.prototype.absent = function () {
     if (this.arr.filter(a => a).length < 25) {
        this.arr.push(false);
        return false;
     }
   };
-  this.summary = function () {
+  Student.prototype.summary = function () {
     let sum = this.arr.filter(a => a).length;
     summaryScore = sum / this.arr.length;
     if (this.getGradeScore() >= 90 && summaryScore >= 0.9) {
@@ -41,7 +43,7 @@ function Student(fname, lname, birthDay, grade) {
         return "Редиска!";
     }
   };
-}
+
 let student1 = new Student("Diana", "Humenna", 2007, [9, 10, 11, 7, 10, 12, 8, 9]);
 console.log(
   student1.fname,
